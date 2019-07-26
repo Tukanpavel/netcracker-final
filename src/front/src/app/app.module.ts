@@ -7,6 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "../material-module/material.module";
+import {HttpClientModule} from "@angular/common/http";
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,7 @@ import {MaterialModule} from "../material-module/material.module";
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
+    HttpClientModule
   ],
   exports:[
   ],

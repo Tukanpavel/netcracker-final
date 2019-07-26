@@ -1,5 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {LoginInfo} from "../login-info";
+import {LoginService} from "../login.service";
 
 @Component({
   selector: 'app-login',
@@ -12,12 +14,18 @@ export class LoginComponent {
     password: new FormControl('',[Validators.required,Validators.minLength(6)]),
   });
 
+  loginService: LoginService;
+  user=new LoginInfo();
+
   is_clicked: boolean=false;
 
   submit() {
     if (this.form.valid&&!this.is_clicked) {
       this.is_clicked=true;
+      this.user.username=this.form.get('username').value;
+      this.user.password=this.form.get('password').value;
       this.submitEM.emit(this.form.value);
+      this.loginService.postLogin(this.user).subscribe()
     }
   }
 
