@@ -1,0 +1,56 @@
+<form class="example-card">
+<mat-card>
+<p>Creating a new account</p>
+
+<form class="example-form" [formGroup]='userForm'>
+  <mat-form-field>
+    <input type="text" matInput placeholder="First name" formControlName='fN'>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" matInput placeholder="Last name" formControlName='lN'>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" matInput placeholder="Login (username)" formControlName='login'>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="password" matInput placeholder="Password" formControlName='password'>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="password" matInput placeholder="Verify Password" formControlName='verifyPassword' [errorStateMatcher]="errorMatcher">
+    <mat-error *ngIf="userForm.hasError('passwordsDoNotMatch')">
+      Passwords do not match!
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" matInput placeholder="Email" formControlName='email'>
+  </mat-form-field>
+
+    <mat-form-field>
+    <input type="text" matInput placeholder="Phone" formControlName='phone'>
+  </mat-form-field>
+
+</form>
+
+<form (click) ="getValues()">
+  <div style="text-align: center;">
+    <button mat-button>Sign Up</button>
+</div>
+</form>
+
+</mat-card>
+</form>
+
+<p>Вы ввели значения: <br>
+  {{fN}} <br>
+  {{lN}} <br>
+  {{login}} <br>
+  {{password}} <br>
+  {{verifyPassword}} <br>
+  {{email}} <br>
+  {{phone}} <br>
+</p>
