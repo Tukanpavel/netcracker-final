@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
 import {User} from "../user";
@@ -16,6 +16,9 @@ class CrossFieldErrorMatcher implements ErrorStateMatcher {
 })
 
 export class UserComponent implements OnInit {
+
+  @Input()
+  signupUser: User;
 
   @Output()
   signupButtonEmit = new EventEmitter<User>();

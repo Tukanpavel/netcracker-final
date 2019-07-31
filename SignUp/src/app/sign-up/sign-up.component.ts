@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../user";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment.prod";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-sign-up',
@@ -19,11 +19,13 @@ export class SignUpComponent implements OnInit {
     this.theUser = new User();
   }
 
-  signup(event: User) {
-    const url = environment.url + "/signup";
+  signUp(event: User) {
+    console.log('signup() - SUCCESS');
+    const url = environment.url + "/registration";
     this.httpService.put(url, event).subscribe(() => {
       alert("Put successful");
       this.theUser = new User();
     });
+    console.log('signup() - SUCCESS');
   }
 }

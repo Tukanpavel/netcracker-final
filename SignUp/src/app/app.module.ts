@@ -16,7 +16,7 @@ import { UserComponent } from './user/user.component';
   declarations: [
     AppComponent,
     SignUpComponent,
-    UserComponent
+    UserComponent,
   ],
   imports: [
     BrowserModule,
