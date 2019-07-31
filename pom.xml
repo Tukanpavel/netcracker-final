@@ -9,8 +9,8 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>Frontend</module>
-        <module>Server</module>
+        <module>frontend</module>
+        <module>server</module>
     </modules>
 
 </project>
