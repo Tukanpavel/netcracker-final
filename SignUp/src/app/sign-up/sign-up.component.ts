@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 import {ErrorStateMatcher, MatCardModule, MatStepperModule, MatInputModule, MatButtonModule} from '@angular/material';
+import {User} from "../user";
 
 
 /** Error when the parent is invalid */
@@ -18,29 +19,23 @@ class CrossFieldErrorMatcher implements ErrorStateMatcher {
 export class SignUpComponent implements OnInit {
 
   userForm: FormGroup;
+  user: User;
   errorMatcher = new CrossFieldErrorMatcher();
 
   constructor(private fb: FormBuilder) {
-  this.initForm();
+    this.initForm();
+    this.user = new User();
   }
-
-  fN:string;
-  lN:string;
-  login:string;
-  password:string;
-  verifyPassword:string;
-  email:string;
-  phone:string;
 
   initForm() {
     this.userForm = this.fb.group({
-      fN: '',
-      lN: '',
-      login: '',
-      password: '',
-      verifyPassword: '',
-      email: '',
-      phone: ''
+      fName: null,
+      lName: null,
+      login: null,
+      password: null,
+      verifyPassword: null,
+      email: null,
+      phone: null
     }, {
       validator: this.passwordValidator
     })
@@ -52,14 +47,38 @@ export class SignUpComponent implements OnInit {
     return condition ? { passwordsDoNotMatch: true} : null;
   }
 
+  isEmpty() {
+    if (this.userForm.get('fName').value == null ||
+        this.userForm.get('lName').value == null ||
+        this.userForm.get('login').value == null ||
+        this.userForm.get('password').value == null ||
+        this.userForm.get('verifyPassword').value == null ||
+        this.userForm.get('email').value == null ||
+        this.userForm.get('phone').value == null) {
+        return true;
+    } else {
+        return false;
+    }
+  }
+
+  validPasswords() {
+    if (this.userForm.get('password').value == this.userForm.get('verifyPassword').value) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   getValues() {
-    this.fN = this.userForm.get('fN').value;
-    this.lN = this.userForm.get('lN').value;
-    this.login = this.userForm.get('login').value;
-    this.password = this.userForm.get('password').value;
-    this.verifyPassword = this.userForm.get('verifyPassword').value;
-    this.email = this.userForm.get('email').value;
-    this.phone = this.userForm.get('phone').value;
+    if (!this.isEmpty() && this.validPasswords()) {
+      this.user.fName = this.userForm.get('fName').value;
+      this.user.lName = this.userForm.get('lName').value;
+      this.user.login = this.userForm.get('login').value;
+      this.user.password = this.userForm.get('password').value;
+      this.user.email = this.userForm.get('email').value;
+      this.user.phone = this.userForm.get('phone').value;
+      console.log('getValues SUCCESS');
+    }
   }
 
   ngOnInit() {

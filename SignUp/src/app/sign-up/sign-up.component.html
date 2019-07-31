@@ -4,34 +4,34 @@
 
 <form class="example-form" [formGroup]='userForm'>
   <mat-form-field>
-    <input type="text" matInput placeholder="First name" formControlName='fN'>
+    <input type="text" matInput placeholder="First name" formControlName='fName' required>
   </mat-form-field>
 
   <mat-form-field>
-    <input type="text" matInput placeholder="Last name" formControlName='lN'>
+    <input type="text" matInput placeholder="Last name" formControlName='lName' required>
   </mat-form-field>
 
   <mat-form-field>
-    <input type="text" matInput placeholder="Login (username)" formControlName='login'>
+    <input type="text" matInput placeholder="Login (username)" formControlName='login' required>
   </mat-form-field>
 
   <mat-form-field>
-    <input type="password" matInput placeholder="Password" formControlName='password'>
+    <input type="password" matInput placeholder="Password" formControlName='password' required>
   </mat-form-field>
 
   <mat-form-field>
-    <input type="password" matInput placeholder="Verify Password" formControlName='verifyPassword' [errorStateMatcher]="errorMatcher">
+    <input type="password" matInput placeholder="Verify Password" formControlName='verifyPassword' [errorStateMatcher]="errorMatcher" required>
     <mat-error *ngIf="userForm.hasError('passwordsDoNotMatch')">
       Passwords do not match!
     </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input type="text" matInput placeholder="Email" formControlName='email'>
+    <input type="text" matInput placeholder="Email" formControlName='email' required>
   </mat-form-field>
 
     <mat-form-field>
-    <input type="text" matInput placeholder="Phone" formControlName='phone'>
+    <input type="text" matInput placeholder="Phone" formControlName='phone' required>
   </mat-form-field>
 
 </form>
@@ -44,13 +44,3 @@
 
 </mat-card>
 </form>
-
-<p>Вы ввели значения: <br>
-  {{fN}} <br>
-  {{lN}} <br>
-  {{login}} <br>
-  {{password}} <br>
-  {{verifyPassword}} <br>
-  {{email}} <br>
-  {{phone}} <br>
-</p>
