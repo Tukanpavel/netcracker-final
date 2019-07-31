@@ -12,7 +12,7 @@
       },
       "root": "src/front",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "NCvito",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

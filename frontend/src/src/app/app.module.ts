@@ -10,11 +10,12 @@ import {MaterialModule} from "../material-module/material.module";
 import {HttpClientModule} from "@angular/common/http";
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavComponent
+    NavComponent,
   ],
   imports: [
     ReactiveFormsModule,

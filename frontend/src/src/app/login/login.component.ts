@@ -14,18 +14,19 @@ export class LoginComponent {
     password: new FormControl('',[Validators.required,Validators.minLength(6)]),
   });
 
-  loginService: LoginService;
-  user=new LoginInfo();
+  //loginService: LoginService= new LoginService();
+
 
   is_clicked: boolean=false;
 
   submit() {
     if (this.form.valid&&!this.is_clicked) {
       this.is_clicked=true;
-      this.user.username=this.form.get('username').value;
-      this.user.password=this.form.get('password').value;
+      //this.user.username=this.form.get('username').value;
+      //this.user.password=this.form.get('password').value;
       this.submitEM.emit(this.form.value);
-      this.loginService.postLogin(this.user).subscribe()
+      //this.loginService.postLogin(this.user).subscribe(x=>console.log('Observer got a next value: ' + x),err => console.error('Observer got an error: ' + err),
+        //() => console.log('Observer got a complete notification'))
     }
   }
 
