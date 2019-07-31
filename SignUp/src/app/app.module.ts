@@ -8,6 +8,7 @@ import {MatStepperModule, MatInputModule, MatButtonModule} from '@angular/materi
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {MatCardModule} from '@angular/material'
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {MatCardModule} from '@angular/material'
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
