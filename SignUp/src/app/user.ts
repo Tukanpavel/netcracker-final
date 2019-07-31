@@ -1,8 +1,8 @@
 export class User {
-  fName: string;
-  lName: string;
-  login: string;
-  password: string;
-  email: string;
-  phone: string;
+  userFname: string;
+  userLname: string;
+  userLogin: string;
+  userPassword: string;
+  userEmail: string;
+  userPhone: string;
 }

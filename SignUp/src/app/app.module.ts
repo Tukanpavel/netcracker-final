@@ -9,12 +9,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {MatCardModule} from '@angular/material'
 import {HttpClientModule} from "@angular/common/http";
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent
+    SignUpComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
