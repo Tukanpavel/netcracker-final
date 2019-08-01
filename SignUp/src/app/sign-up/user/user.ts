@@ -1,8 +1,13 @@
 export class User {
-  userFname: string;
-  userLname: string;
-  userLogin: string;
-  userPassword: string;
-  userEmail: string;
-  userPhone: string;
+
+  id:bigint;
+  login:string;
+  password:string;
+  phone:string;
+  firstName:string;
+  lastName:string;
+  email:string;
+  banExpired:Date;
+  banReason:string;
+
 }

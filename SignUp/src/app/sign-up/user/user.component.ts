@@ -32,12 +32,12 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fName = this.user.userFname;
-    this.lName = this.user.userLname;
-    this.login = this.user.userLogin;
-    this.password = this.user.userPassword;
-    this.email = this.user.userEmail;
-    this.phone = this.user.userPhone;
+    this.fName = this.user.firstName;
+    this.lName = this.user.lastName;
+    this.login = this.user.login;
+    this.password = this.user.password;
+    this.email = this.user.email;
+    this.phone = this.user.phone;
   }
 
   getEmailErrorMessage() {
@@ -61,12 +61,15 @@ export class UserComponent implements OnInit {
   getValues() {
     if (!this.isFormEmpty() && !this.getEmailErrorMessage()) {
       this.signupButtonEmit.emit({
-        userFname: this.fName,
-        userLname: this.lName,
-        userLogin: this.login,
-        userPassword: this.password,
-        userEmail: this.email,
-        userPhone: this.phone
+        id: null,
+        banReason: null,
+        banExpired: null,
+        firstName: this.fName,
+        lastName: this.lName,
+        login: this.login,
+        password: this.password,
+        email: this.email,
+        phone: this.phone
       });
       console.log('getValues() - SUCCESS');
     }
