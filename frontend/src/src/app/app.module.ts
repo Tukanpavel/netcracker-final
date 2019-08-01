@@ -9,6 +9,11 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "../material-module/material.module";
 import {HttpClientModule} from "@angular/common/http";
 
+import {MatStepperModule, MatInputModule, MatButtonModule, MatCardModule} from '@angular/material'
+import {FormsModule} from '@angular/forms';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { UserComponent } from './sign-up/user/user.component';
+
 
 
 @NgModule({
@@ -16,14 +21,20 @@ import {HttpClientModule} from "@angular/common/http";
     AppComponent,
     LoginComponent,
     NavComponent,
+    SignUpComponent,
+    UserComponent
   ],
   imports: [
     ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
-    BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatStepperModule, MatInputModule, MatButtonModule,
+    MatCardModule,
+    FormsModule
   ],
   exports:[
   ],
