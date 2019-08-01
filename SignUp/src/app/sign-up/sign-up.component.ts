@@ -13,7 +13,6 @@ import {throwError} from "rxjs";
 export class SignUpComponent implements OnInit {
 
   public theUser: User;
-  private errorMessage: string;
 
   constructor(private http: HttpClient) {
   }
