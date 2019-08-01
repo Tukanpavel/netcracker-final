@@ -22,7 +22,7 @@ export class SignUpComponent implements OnInit {
     return this.http.post<User>(environment.url+'/registration', event).subscribe(() => {
       alert("You have been signed up successfully");
     }, error1 => alert("Error: it was unable to sign up!"));
-    this.theUser = new User();
+    this.theUser = event;
 
     console.log('signup() - SUCCESS');
   }
