@@ -23,11 +23,13 @@ export class UserComponent implements OnInit {
   email: string;
   phone: string;
 
-  emailForm: FormControl;
+  emailCheck: FormControl;
+  phoneCheck: FormControl;
   user: User;
 
   constructor() {
-    this.emailForm = new FormControl('', [Validators.email]);
+    this.emailCheck = new FormControl('', [Validators.email]);
+    this.phoneCheck = new FormControl('',[Validators.pattern('[6-9]\\d{9}')])
     this.user = new User();
   }
 
@@ -41,8 +43,13 @@ export class UserComponent implements OnInit {
   }
 
   getEmailErrorMessage() {
-    return this.emailForm.hasError('email') ? 'Not a valid email' :
+    return this.emailCheck.hasError('email') ? 'Not a valid email' :
         '';
+  }
+
+  getPhoneErrorMessage() {
+    return this.phoneCheck.hasError('pattern') ? 'Not a valid phone number' :
+      '';
   }
 
   isFormEmpty() {
@@ -59,7 +66,7 @@ export class UserComponent implements OnInit {
   }
 
   getValues() {
-    if (!this.isFormEmpty() && !this.getEmailErrorMessage()) {
+    if (!this.isFormEmpty() && !this.getEmailErrorMessage() &&!this.getPhoneErrorMessage()) {
       this.signupButtonEmit.emit({
         id: null,
         banReason: null,
