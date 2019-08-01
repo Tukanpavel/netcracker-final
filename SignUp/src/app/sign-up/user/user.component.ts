@@ -66,7 +66,7 @@ export class UserComponent implements OnInit {
   }
 
   getValues() {
-    if (!this.isFormEmpty() && !this.getEmailErrorMessage() &&!this.getPhoneErrorMessage()) {
+    if (!this.isFormEmpty() && !this.getEmailErrorMessage() &&!this.getPhoneErrorMessage() && this.password.length >= 6) {
       this.signupButtonEmit.emit({
         id: null,
         banReason: null,
