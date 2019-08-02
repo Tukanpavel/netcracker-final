@@ -1,7 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {LoginInfo} from "../login-info";
-import {LoginService} from "../login.service";
+import {LoginInfoModel} from "./login-info.model";
+import {LoginService} from "./login.service";
 
 @Component({
   selector: 'app-login',
@@ -9,28 +9,26 @@ import {LoginService} from "../login.service";
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent {
+
+  constructor(private loginService: LoginService){ }
+
   form: FormGroup = new FormGroup({
     username: new FormControl('',[Validators.required]),
     password: new FormControl('',[Validators.required,Validators.minLength(6)]),
   });
 
-  //loginService: LoginService= new LoginService();
-
-
-  is_clicked: boolean=false;
+  user=new LoginInfoModel();
+  isClicked: boolean=false;
 
   submit() {
-    if (this.form.valid&&!this.is_clicked) {
-      this.is_clicked=true;
-      //this.user.username=this.form.get('username').value;
-      //this.user.password=this.form.get('password').value;
-      this.submitEM.emit(this.form.value);
-      //this.loginService.postLogin(this.user).subscribe(x=>console.log('Observer got a next value: ' + x),err => console.error('Observer got an error: ' + err),
-        //() => console.log('Observer got a complete notification'))
+    if (this.form.valid && !this.isClicked) {
+      this.isClicked=true;
+      this.user=this.form.value;
+      this.loginService.postLogin(this.user).subscribe(x=>console.log('Observer got a next value: ' + x),err => console.error('Observer got an error: ' + err),
+        () => console.log('Observer got a complete notification'))
+      console.log(this.user);
     }
   }
-
-  @Output() submitEM = new EventEmitter();
 
   getUsernameErrorMessage(){
     return 'Write username!';

@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {LoginInfo} from "./login-info";
 import {catchError} from "rxjs/operators";
 import {Observable, throwError} from "rxjs";
-import {environment} from "../environments/environment";
+import {environment} from "../../environments/environment";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class HttpService {
 
   constructor(private http: HttpClient) {
   }
@@ -30,8 +29,8 @@ export class LoginService {
       'Something bad happened; please try again later.');
   };
 
-  postLogin(loginInfo: LoginInfo): Observable<LoginInfo> {
-    return this.http.post<LoginInfo>(environment.url+'/login', loginInfo)
+  post(url:string,object: Object): Observable<typeof object> {
+    return this.http.post<typeof object>(environment.url+url, object)
       .pipe(
         catchError(this.handleError)
       );
