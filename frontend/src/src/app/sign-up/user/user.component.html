@@ -1,0 +1,35 @@
+<div class="form-card">
+  <mat-card>
+    <p>Creating a new account</p>
+
+      <mat-form-field>
+        <input type="text" matInput placeholder="First name" [(ngModel)]="fName" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" matInput placeholder="Last name" [(ngModel)]="lName" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" matInput placeholder="Login (username)" [(ngModel)]="login" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="password" matInput placeholder="Password" [(ngModel)]="password" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" matInput placeholder="Email" [(ngModel)]="email" [formControl] = 'emailForm' required>
+        <mat-error *ngIf="emailForm.invalid">{{getEmailErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" matInput placeholder="Phone" [(ngModel)]="phone" required>
+      </mat-form-field>
+
+      <div class="submitButton">
+        <button mat-raised-button (click) ="getValues()">Sign Up</button>
+      </div>
+
+  </mat-card>
+</div>
