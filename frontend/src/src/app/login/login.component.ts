@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {User} from "../sign-up/user/user";
 import {LoginInfo} from "../login-info";
 import {LoginService} from "../login.service";
 
@@ -14,7 +15,7 @@ export class LoginComponent {
     password: new FormControl('',[Validators.required,Validators.minLength(6)]),
   });
 
-  //loginService: LoginService= new LoginService();
+
 
 
   is_clicked: boolean=false;
@@ -22,15 +23,13 @@ export class LoginComponent {
   submit() {
     if (this.form.valid&&!this.is_clicked) {
       this.is_clicked=true;
-      //this.user.username=this.form.get('username').value;
-      //this.user.password=this.form.get('password').value;
       this.submitEM.emit(this.form.value);
       //this.loginService.postLogin(this.user).subscribe(x=>console.log('Observer got a next value: ' + x),err => console.error('Observer got an error: ' + err),
         //() => console.log('Observer got a complete notification'))
     }
   }
 
-  @Output() submitEM = new EventEmitter();
+  @Output() submitEM = new EventEmitter <User>();
 
   getUsernameErrorMessage(){
     return 'Write username!';
