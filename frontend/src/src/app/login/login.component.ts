@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {LoginInfo} from "../login-info";
-import {LoginService} from "../login.service";
+import {LoginInfoModel} from "./login-info.model";
+import {LoginService} from "./login.service";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent {
     password: new FormControl('',[Validators.required,Validators.minLength(6)]),
   });
 
-  user=new LoginInfo();
+  user=new LoginInfoModel();
   isClicked: boolean=false;
 
   submit() {
