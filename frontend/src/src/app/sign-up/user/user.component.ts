@@ -1,13 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material';
+import {FormControl, Validators} from '@angular/forms';
 import {User} from "./user";
-
-class CrossFieldErrorMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return control.dirty && form.invalid;
-  }
-}
 
 @Component({
   selector: 'app-user',
@@ -30,26 +23,33 @@ export class UserComponent implements OnInit {
   email: string;
   phone: string;
 
-  emailForm: FormControl;
+  emailCheck: FormControl;
+  phoneCheck: FormControl;
   user: User;
 
   constructor() {
-    this.emailForm = new FormControl('', [Validators.email]);
+    this.emailCheck = new FormControl('', [Validators.email]);
+    this.phoneCheck = new FormControl('',[Validators.pattern('[6-9]\\d{9}')])
     this.user = new User();
   }
 
   ngOnInit() {
-    this.fName = this.user.userFname;
-    this.lName = this.user.userLname;
-    this.login = this.user.userLogin;
-    this.password = this.user.userPassword;
-    this.email = this.user.userEmail;
-    this.phone = this.user.userPhone;
+    this.fName = this.user.firstName;
+    this.lName = this.user.lastName;
+    this.login = this.user.login;
+    this.password = this.user.password;
+    this.email = this.user.email;
+    this.phone = this.user.phone;
   }
 
   getEmailErrorMessage() {
-    return this.emailForm.hasError('email') ? 'Not a valid email' :
+    return this.emailCheck.hasError('email') ? 'Not a valid email' :
         '';
+  }
+
+  getPhoneErrorMessage() {
+    return this.phoneCheck.hasError('pattern') ? 'Not a valid phone number' :
+      '';
   }
 
   isFormEmpty() {
@@ -66,14 +66,17 @@ export class UserComponent implements OnInit {
   }
 
   getValues() {
-    if (!this.isFormEmpty() && !this.getEmailErrorMessage()) {
+    if (!this.isFormEmpty() && !this.getEmailErrorMessage() &&!this.getPhoneErrorMessage() && this.password.length >= 6) {
       this.signupButtonEmit.emit({
-        userFname: this.fName,
-        userLname: this.lName,
-        userLogin: this.login,
-        userPassword: this.password,
-        userEmail: this.email,
-        userPhone: this.phone
+        id: null,
+        banReason: null,
+        banExpired: null,
+        firstName: this.fName,
+        lastName: this.lName,
+        login: this.login,
+        password: this.password,
+        email: this.email,
+        phone: "+7" + this.phone
       });
       console.log('getValues() - SUCCESS');
     }

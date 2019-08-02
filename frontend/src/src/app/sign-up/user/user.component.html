@@ -15,16 +15,19 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input type="password" matInput placeholder="Password" [(ngModel)]="password" required>
+        <input type="password" matInput placeholder="Password" [(ngModel)]="password" minlength="6" required>
+        <mat-error>Password must be at least 6 characters long</mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input type="text" matInput placeholder="Email" [(ngModel)]="email" [formControl] = 'emailForm' required>
-        <mat-error *ngIf="emailForm.invalid">{{getEmailErrorMessage()}}</mat-error>
+        <input type="text" matInput placeholder="Email" [(ngModel)]="email" [formControl] = 'emailCheck' required>
+        <mat-error *ngIf="emailCheck.invalid">{{getEmailErrorMessage()}}</mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input type="text" matInput placeholder="Phone" [(ngModel)]="phone" required>
+        <span matPrefix>+7 &nbsp;</span>
+        <input type="text" matInput placeholder="Phone" [(ngModel)]="phone" [formControl] = 'phoneCheck' required>
+        <mat-error *ngIf="phoneCheck.invalid">{{getPhoneErrorMessage()}}</mat-error>
       </mat-form-field>
 
       <div class="submitButton">
