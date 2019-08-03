@@ -25,21 +25,13 @@ export class UserComponent implements OnInit {
 
   emailCheck: FormControl;
   phoneCheck: FormControl;
-  user: User;
 
   constructor() {
     this.emailCheck = new FormControl('', [Validators.email]);
     this.phoneCheck = new FormControl('',[Validators.pattern('[6-9]\\d{9}')])
-    this.user = new User();
   }
 
   ngOnInit() {
-    this.fName = this.user.firstName;
-    this.lName = this.user.lastName;
-    this.login = this.user.login;
-    this.password = this.user.password;
-    this.email = this.user.email;
-    this.phone = this.user.phone;
   }
 
   getEmailErrorMessage() {
@@ -78,7 +70,6 @@ export class UserComponent implements OnInit {
         email: this.email,
         phone: "+7" + this.phone
       });
-      console.log('getValues() - SUCCESS');
     }
   }
 }
