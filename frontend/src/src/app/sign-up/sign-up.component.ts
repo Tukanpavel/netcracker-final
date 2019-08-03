@@ -4,6 +4,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {catchError} from "rxjs/operators";
 import {throwError} from "rxjs";
+import {AppRoutingModule} from "../app-routing.module";
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +15,8 @@ export class SignUpComponent implements OnInit {
 
   public theUser: User;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private rout: AppRoutingModule) {
   }
 
   ngOnInit() {
@@ -24,6 +26,7 @@ export class SignUpComponent implements OnInit {
     this.theUser = event;
     return this.http.post<User>(environment.url+'/registration', event).pipe(catchError(this.handleError)).subscribe(() => {
       alert("You have been signed up successfully");
+      this.rout.goTo("/sign-in");
     });
   }
 
