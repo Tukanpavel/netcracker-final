@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.awt.*;
 import java.util.Collections;
@@ -47,6 +48,8 @@ public class LoginTest {
     @Autowired
     UserService userService;
     @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
     AnnouncementService announcementService;
     @Autowired
     private MockMvc mockMvc;
@@ -57,7 +60,7 @@ public class LoginTest {
         User user = new User();
 
         user.setLogin("admin");
-        user.setPassword("admin");
+        user.setPassword(passwordEncoder.encode("admin"));
         user.setEmail("email");
         user.setFirstName("Petya");
         user.setLastName("Petrov");
