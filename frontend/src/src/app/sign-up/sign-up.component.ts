@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from "./user";
 import {AppRoutingModule} from "../app-routing.module";
 import {HttpService} from "../services/http.service";
@@ -12,80 +12,62 @@ import {MatSnackBar} from "@angular/material";
 })
 export class SignUpComponent implements OnInit {
 
-  fName: string;
-  lName: string;
-  login: string;
-  password: string;
-  email: string;
-  phone: string;
-
-  emailCheck: FormControl;
-  phoneCheck: FormControl;
-  loginCheck: FormControl;
-
   isClicked: boolean;
   isUsed: boolean;
 
   private theUser: User;
 
   constructor(private httpService: HttpService, private router: AppRoutingModule, private _snackBar: MatSnackBar) {
-    this.emailCheck = new FormControl('', [Validators.email]);
-    this.phoneCheck = new FormControl('',[Validators.pattern('[6-9]\\d{9}')]);
-    this.loginCheck = new FormControl('');
-    this.isClicked = false;
-    this.isUsed = false;
 
-    this.fName = '';
-    this.lName = '';
-    this.login = '';
-    this.password = '';
-    this.email = '';
-    this.phone = '';
+  this.isClicked = false;
+  this.isUsed = false;
+
   }
+
+  formGroup: FormGroup = new FormGroup( {
+      fNameF: new FormControl(''),
+      lNameF: new FormControl(''),
+      loginF: new FormControl(''),
+      passwordF: new FormControl(''),
+      emailF: new FormControl('', [Validators.email]),
+      phoneF: new FormControl('',[Validators.pattern('[6-9]\\d{9}')]),
+    }
+
+  );
 
   ngOnInit() {
   }
 
   getEmailErrorMessage() {
-    return this.emailCheck.hasError('email') ? 'Not a valid email' :
+    return this.formGroup.get('emailF').hasError('email') ? 'Not a valid email' :
       '';
   }
 
   getPhoneErrorMessage() {
-    return this.phoneCheck.hasError('pattern') ? 'Not a valid phone number' :
+    return this.formGroup.get('phoneF').hasError('pattern') ? 'Not a valid phone number' :
       '';
   }
 
-  isFormEmpty() {
-    if (this.fName == '' ||
-      this.lName == '' ||
-      this.login == '' ||
-      this.password == '' ||
-      this.email == '' ||
-      this.phone == '') {
-      return true;
-    } else {
-      return false;
-    }
+  getLoginErrorMessage() {
+      return this.formGroup.get('loginF').hasError('pattern') ? 'This username has been already used' :
+        '';
   }
 
   getValues() {
-    if (!this.isClicked && !this.isFormEmpty() && !this.getEmailErrorMessage() &&!this.getPhoneErrorMessage() && this.password.length >= 6) {
+    if (!this.isClicked && this.formGroup.valid) {
       this.isClicked = true;
       this.theUser = new User();
 
-      this.theUser.firstName = this.fName;
-      this.theUser.lastName = this.lName;
-      this.theUser.login = this.login;
-      this.theUser.password = this.password;
-      this.theUser.email = this.email;
-      this.theUser.phone = this.phone;
+      this.theUser.firstName = this.formGroup.get('fNameF').value;
+      this.theUser.lastName = this.formGroup.get('lNameF').value;
+      this.theUser.login = this.formGroup.get('loginF').value;
+      this.theUser.password = this.formGroup.get('passwordF').value;
+      this.theUser.email = this.formGroup.get('emailF').value;
+      this.theUser.phone = this.formGroup.get('phoneF').value;
       this.theUser.banExpired = null;
       this.theUser.banReason = null;
 
       this.signUp(this.theUser);
-    } else {
-      this.openSnackBar("Please, fill entire form correctly", "OK");
     }
   }
 
@@ -101,9 +83,9 @@ export class SignUpComponent implements OnInit {
       response => {
           console.log(response);
           if (response === "User already exists") {
-            this.loginCheck.setErrors({'': true});
           } else {
             this.openSnackBar("It was unable to sign up. Please, try again later", "OK");
+            this.formGroup.get('loginF').setErrors(response);
           }
           this.isClicked = false;
         }

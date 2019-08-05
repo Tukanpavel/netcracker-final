@@ -1,39 +1,40 @@
-<div class="form-card">
-  <mat-card>
+
+  <mat-card class="form-card">
+
+    <form [formGroup]="formGroup" (ngSubmit)="getValues()">
     <p>Creating a new account</p>
 
     <mat-form-field>
-      <input type="text" matInput placeholder="First name" [(ngModel)]="fName" required>
+      <input type="text" matInput placeholder="First name" formControlName = "fNameF" required>
     </mat-form-field>
 
     <mat-form-field>
-      <input type="text" matInput placeholder="Last name" [(ngModel)]="lName" required>
+      <input type="text" matInput placeholder="Last name" formControlName = "lNameF" required>
     </mat-form-field>
 
     <mat-form-field>
-      <input type="text" matInput placeholder="Login (username)" [(ngModel)]="login" [formControl] = 'loginCheck' required>
-      <mat-error>This username has been already used</mat-error>
+      <input type="text" matInput placeholder="Login (username)" formControlName = "loginF" required>
+      <mat-error *ngIf="formGroup.get('loginF').invalid">{{getLoginErrorMessage()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input type="password" matInput placeholder="Password" [(ngModel)]="password" minlength="6" required>
-      <mat-error>Password must be at least 6 characters long</mat-error>
+      <input type="password" matInput placeholder="Password" formControlName = "passwordF" minlength="6" required>
+      <mat-error>Password must be six characters or longer</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input type="text" matInput placeholder="Email" [(ngModel)]="email" [formControl] = 'emailCheck' required>
-      <mat-error *ngIf="emailCheck.invalid">{{getEmailErrorMessage()}}</mat-error>
+      <input type="text" matInput placeholder="Email" formControlName = "emailF" required>
+      <mat-error *ngIf="formGroup.get('emailF').invalid">{{getEmailErrorMessage()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <span matPrefix>+7 &nbsp;</span>
-      <input type="text" matInput placeholder="Phone" [(ngModel)]="phone" [formControl] = 'phoneCheck' required>
-      <mat-error *ngIf="phoneCheck.invalid">{{getPhoneErrorMessage()}}</mat-error>
+      <input type="text" matInput placeholder="Phone" formControlName = "phoneF" required>
+      <mat-error *ngIf="formGroup.get('phoneF').invalid">{{getPhoneErrorMessage()}}</mat-error>
     </mat-form-field>
 
     <div class="submitButton">
-      <button mat-raised-button [disabled]="isClicked" (click) ="getValues()">Sign Up</button>
+      <button type="submit" mat-raised-button [disabled]="isClicked">Sign Up</button>
     </div>
-
+    </form>
   </mat-card>
-</div>
