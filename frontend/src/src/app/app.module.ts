@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { UserComponent } from './sign-up/user/user.component';
 
 
 
@@ -20,8 +19,7 @@ import { UserComponent } from './sign-up/user/user.component';
     AppComponent,
     LoginComponent,
     NavComponent,
-    SignUpComponent,
-    UserComponent
+    SignUpComponent
   ],
   imports: [
     ReactiveFormsModule,

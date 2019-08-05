@@ -1,4 +1,39 @@
-<app-user
-  [signupUser]="theUser"
-  (signupButtonEmit) = "signUp($event)">
-</app-user>
+<div class="form-card">
+  <mat-card>
+    <p>Creating a new account</p>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="First name" [(ngModel)]="fName" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Last name" [(ngModel)]="lName" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Login (username)" [(ngModel)]="login" [formControl] = 'loginCheck' required>
+      <mat-error>This username has been already used</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="password" matInput placeholder="Password" [(ngModel)]="password" minlength="6" required>
+      <mat-error>Password must be at least 6 characters long</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Email" [(ngModel)]="email" [formControl] = 'emailCheck' required>
+      <mat-error *ngIf="emailCheck.invalid">{{getEmailErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <span matPrefix>+7 &nbsp;</span>
+      <input type="text" matInput placeholder="Phone" [(ngModel)]="phone" [formControl] = 'phoneCheck' required>
+      <mat-error *ngIf="phoneCheck.invalid">{{getPhoneErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <div class="submitButton">
+      <button mat-raised-button (click) ="getValues()">Sign Up</button>
+    </div>
+
+  </mat-card>
+</div>
