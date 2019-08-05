@@ -24,6 +24,7 @@ export class SignUpComponent implements OnInit {
   loginCheck: FormControl;
 
   isClicked: boolean;
+  isUsed: boolean;
 
   private theUser: User;
 
@@ -32,7 +33,14 @@ export class SignUpComponent implements OnInit {
     this.phoneCheck = new FormControl('',[Validators.pattern('[6-9]\\d{9}')]);
     this.loginCheck = new FormControl('');
     this.isClicked = false;
+    this.isUsed = false;
 
+    this.fName = '';
+    this.lName = '';
+    this.login = '';
+    this.password = '';
+    this.email = '';
+    this.phone = '';
   }
 
   ngOnInit() {
@@ -49,12 +57,12 @@ export class SignUpComponent implements OnInit {
   }
 
   isFormEmpty() {
-    if (this.fName == null ||
-      this.lName == null ||
-      this.login == null ||
-      this.password == null ||
-      this.email == null ||
-      this.phone == null) {
+    if (this.fName == '' ||
+      this.lName == '' ||
+      this.login == '' ||
+      this.password == '' ||
+      this.email == '' ||
+      this.phone == '') {
       return true;
     } else {
       return false;
@@ -77,7 +85,7 @@ export class SignUpComponent implements OnInit {
 
       this.signUp(this.theUser);
     } else {
-      this.openSnackBar("Please, fill entire form", "OK");
+      this.openSnackBar("Please, fill entire form correctly", "OK");
     }
   }
 
@@ -90,8 +98,13 @@ export class SignUpComponent implements OnInit {
           this.openSnackBar("You have been signed up successfully", "OK");
           this.router.goTo("/sign-in");
         },
-        response => {
-          this.loginCheck.setErrors({'': true});
+      response => {
+          console.log(response);
+          if (response === "User already exists") {
+            this.loginCheck.setErrors({'': true});
+          } else {
+            this.openSnackBar("It was unable to sign up. Please, try again later", "OK");
+          }
           this.isClicked = false;
         }
     );
