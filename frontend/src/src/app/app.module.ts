@@ -6,6 +6,7 @@ import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {MaterialModule} from "../material-module/material.module";
 import {HttpClientModule} from "@angular/common/http";
 import {MatStepperModule, MatInputModule, MatButtonModule, MatCardModule} from '@angular/material'
+import { MatSnackBarModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -30,7 +31,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     BrowserModule,
     MatStepperModule, MatInputModule, MatButtonModule,
     MatCardModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
   exports:[
   ],

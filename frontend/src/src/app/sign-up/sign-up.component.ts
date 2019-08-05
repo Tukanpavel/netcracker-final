@@ -3,6 +3,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {User} from "./user";
 import {AppRoutingModule} from "../app-routing.module";
 import {HttpService} from "../services/http.service";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-sign-up',
@@ -26,7 +27,7 @@ export class SignUpComponent implements OnInit {
 
   private theUser: User;
 
-  constructor(private httpService: HttpService, private router: AppRoutingModule) {
+  constructor(private httpService: HttpService, private router: AppRoutingModule, private _snackBar: MatSnackBar) {
     this.emailCheck = new FormControl('', [Validators.email]);
     this.phoneCheck = new FormControl('',[Validators.pattern('[6-9]\\d{9}')]);
     this.loginCheck = new FormControl('');
@@ -75,6 +76,8 @@ export class SignUpComponent implements OnInit {
       this.theUser.banReason = null;
 
       this.signUp(this.theUser);
+    } else {
+      this.openSnackBar("Please, fill entire form", "OK");
     }
   }
 
@@ -84,6 +87,7 @@ export class SignUpComponent implements OnInit {
         () => {
           console.log("You have been signed up successfully");
           this.isClicked = false;
+          this.openSnackBar("You have been signed up successfully", "OK");
           this.router.goTo("/sign-in");
         },
         response => {
@@ -92,6 +96,12 @@ export class SignUpComponent implements OnInit {
         }
     );
 
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000
+    });
   }
 
 }
