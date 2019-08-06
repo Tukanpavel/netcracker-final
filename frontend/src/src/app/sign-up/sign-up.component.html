@@ -1,7 +1,7 @@
-
   <mat-card class="form-card">
 
     <form [formGroup]="formGroup" (ngSubmit)="getValues()">
+
     <p>Creating a new account</p>
 
     <mat-form-field>
@@ -14,7 +14,7 @@
 
     <mat-form-field>
       <input type="text" matInput placeholder="Login (username)" formControlName = "loginF" required>
-      <mat-error *ngIf="formGroup.get('loginF').invalid">{{getLoginErrorMessage()}}</mat-error>
+      <mat-error>{{getLoginErrorMessage()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -36,5 +36,7 @@
     <div class="submitButton">
       <button type="submit" mat-raised-button [disabled]="isClicked">Sign Up</button>
     </div>
+
     </form>
+
   </mat-card>

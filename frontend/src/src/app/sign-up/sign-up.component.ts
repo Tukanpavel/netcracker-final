@@ -12,6 +12,8 @@ import {MatSnackBar} from "@angular/material";
 })
 export class SignUpComponent implements OnInit {
 
+  formGroup: FormGroup;
+
   isClicked: boolean;
   isUsed: boolean;
 
@@ -22,18 +24,17 @@ export class SignUpComponent implements OnInit {
   this.isClicked = false;
   this.isUsed = false;
 
+    this.formGroup = new FormGroup( {
+        fNameF: new FormControl(''),
+        lNameF: new FormControl(''),
+        loginF: new FormControl(''),
+        passwordF: new FormControl(''),
+        emailF: new FormControl('', [Validators.email]),
+        phoneF: new FormControl('',[Validators.pattern('[6-9]\\d{9}')]),
+      }
+
+    );
   }
-
-  formGroup: FormGroup = new FormGroup( {
-      fNameF: new FormControl(''),
-      lNameF: new FormControl(''),
-      loginF: new FormControl(''),
-      passwordF: new FormControl(''),
-      emailF: new FormControl('', [Validators.email]),
-      phoneF: new FormControl('',[Validators.pattern('[6-9]\\d{9}')]),
-    }
-
-  );
 
   ngOnInit() {
   }
@@ -83,9 +84,9 @@ export class SignUpComponent implements OnInit {
       response => {
           console.log(response);
           if (response === "User already exists") {
+            this.formGroup.get('loginF').setErrors({'pattern': true});
           } else {
             this.openSnackBar("It was unable to sign up. Please, try again later", "OK");
-            this.formGroup.get('loginF').setErrors(response);
           }
           this.isClicked = false;
         }
