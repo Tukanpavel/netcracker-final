@@ -2,8 +2,9 @@
   <div class="container">
     <h3 routerLink="/" class="name">{{appTitle}}</h3>
     <ul class="nav_links">
-        <li><a mat-button routerLink="/advertisements">Advertisements</a></li>
-        <li><a mat-button routerLink="/sign-in">Sign in</a></li>
+      <li><a mat-button routerLink="/advertisements">Advertisements</a></li>
+      <li><a *ngIf="!loginService.isLoggedIn()" mat-button routerLink="/sign-in">Sign in</a></li>
+      <li><a *ngIf="loginService.isLoggedIn()" mat-button routerLink="/user">{{username()}}</a></li>
     </ul>
   </div>
 </header>

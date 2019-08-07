@@ -12,6 +12,4 @@
         <module>frontend</module>
         <module>server</module>
     </modules>
-
-
 </project>

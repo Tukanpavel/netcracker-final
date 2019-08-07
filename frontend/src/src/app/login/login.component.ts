@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {LoginModel} from "./login.model";
 import {LoginService} from "./login.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -10,24 +11,39 @@ import {LoginService} from "./login.service";
 })
 export class LoginComponent {
 
-  constructor(private loginService: LoginService){ }
+  constructor(private loginService: LoginService, private router: Router){ }
 
   form: FormGroup = new FormGroup({
     username: new FormControl('',[Validators.required]),
     password: new FormControl('',[Validators.required,Validators.minLength(6)]),
   });
 
-  user=new LoginModel();
+  user=new LoginModel;
   isClicked: boolean=false;
+  invalidLogin: boolean;
 
   submit() {
     if (this.form.valid && !this.isClicked) {
       this.isClicked=true;
       this.user=this.form.value;
-      this.loginService.postLogin(this.user).subscribe(x=>console.log('Observer got a next value: ' + x),err => console.error('Observer got an error: ' + err),
-        () => console.log('Observer got a complete notification'))
+      this.checkLogin();
       console.log(this.user);
     }
+  }
+
+  checkLogin(): void{
+    this.loginService.authenticate(this.user.username, this.user.password).subscribe(
+      data => {
+        this.router.navigate([
+          this.loginService.redirectUrl !== '' ? this.loginService.redirectUrl : ''
+        ])
+        this.invalidLogin = false
+      },
+      error => {
+        this.invalidLogin = true
+        this.isClicked = false;
+      }
+    )
   }
 
   getUsernameErrorMessage(){

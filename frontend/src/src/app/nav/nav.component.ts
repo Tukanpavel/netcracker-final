@@ -8,6 +8,7 @@ import {LoginService} from "../login/login.service";
 })
 export class NavComponent implements OnInit {
   appTitle:string='NCvito';
+  username():string{ return sessionStorage.getItem('username');}
   constructor(private loginService:LoginService) { }
 
   ngOnInit() {

@@ -1,20 +1,33 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "../services/http.service";
 import {LoginModel} from "./login.model";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {map} from "rxjs/operators";
+import {User} from "../sign-up/user/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  constructor(private httpService:HttpService) { }
-
-  redirectUrl:string;
-
-  authenticate(username, password) {
-    sessionStorage.setItem('username', username)
+  constructor(private httpClient: HttpClient) {
   }
 
-  isLoggedIn():boolean {
+  redirectUrl: string = '';
+
+  authenticate(username, password) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(username + ':' + password)});
+    return this.httpClient.post<User>('http://localhost:8080/login',{headers} ).pipe(
+      map(
+        userData => {
+          sessionStorage.setItem('token', btoa(username + ':' + password));
+          sessionStorage.setItem('username', username)
+          return userData;
+        }
+      )
+    );
+  }
+
+  isLoggedIn(): boolean {
     let user = sessionStorage.getItem('username')
     console.log(!(user === null))
     return !(user === null)
@@ -23,10 +36,5 @@ export class LoginService {
   logOut(): void {
     sessionStorage.removeItem('username')
   }
-
-  postLogin(login:LoginModel) {
-    let request:string='http://localhost:8080/login?username=test&password=qweqwe';
-    console.log(request);
-    return this.httpService.post(request);
-  }
 }
+

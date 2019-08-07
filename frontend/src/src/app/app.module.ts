@@ -13,6 +13,7 @@ import {MatStepperModule, MatInputModule, MatButtonModule, MatCardModule} from '
 import {FormsModule} from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserComponent } from './sign-up/user/user.component';
+import { PlaceholderComponent } from './placeholder/placeholder.component';
 
 
 
@@ -22,7 +23,8 @@ import { UserComponent } from './sign-up/user/user.component';
     LoginComponent,
     NavComponent,
     SignUpComponent,
-    UserComponent
+    UserComponent,
+    PlaceholderComponent
   ],
   imports: [
     ReactiveFormsModule,
