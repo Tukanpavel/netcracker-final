@@ -6,7 +6,7 @@ import {HttpService} from "../services/http.service";
 import {MatSnackBar} from "@angular/material";
 
 @Component({
-  selector: 'app-sign-up',
+  selector: 'NCvito-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.less']
 })
