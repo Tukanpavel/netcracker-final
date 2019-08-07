@@ -9,10 +9,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "../material-module/material.module";
 import {HttpClientModule} from "@angular/common/http";
 
-import {MatStepperModule, MatInputModule, MatButtonModule, MatCardModule} from '@angular/material'
+import {MatStepperModule, MatInputModule, MatButtonModule, MatCardModule, MatSnackBarModule} from '@angular/material'
 import {FormsModule} from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { UserComponent } from './sign-up/user/user.component';
 import { PlaceholderComponent } from './placeholder/placeholder.component';
 
 
@@ -23,8 +22,8 @@ import { PlaceholderComponent } from './placeholder/placeholder.component';
     LoginComponent,
     NavComponent,
     SignUpComponent,
-    UserComponent,
-    PlaceholderComponent
+    PlaceholderComponent,
+    SignUpComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -36,7 +35,8 @@ import { PlaceholderComponent } from './placeholder/placeholder.component';
     BrowserAnimationsModule,
     MatStepperModule, MatInputModule, MatButtonModule,
     MatCardModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
   exports:[
   ],

@@ -17,12 +17,12 @@ import java.util.Collections;
 public class RegistrationController {
     private final UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public RegistrationController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/registration")
     public ResponseEntity addUser(@RequestBody User user) {

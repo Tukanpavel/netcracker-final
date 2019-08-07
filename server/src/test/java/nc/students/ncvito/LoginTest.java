@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.awt.*;
 import java.util.Collections;
@@ -48,11 +49,11 @@ public class LoginTest {
     @Autowired
     UserService userService;
     @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
     AnnouncementService announcementService;
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Before
 
