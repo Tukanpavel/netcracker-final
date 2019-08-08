@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map} from "rxjs/operators";
-import {User} from "../sign-up/user";
+
+export class Login{
+  constructor(
+    public status:string,
+  ) {}
+
+}
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +20,7 @@ export class LoginService {
 
   authenticate(username, password) {
     const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(username + ':' + password)});
-    return this.httpClient.get<User>('http://localhost:8080/login',{headers} ).pipe(
+    return this.httpClient.get<Login>('http://localhost:8080/login',{headers} ).pipe(
       map(
         userData => {
           sessionStorage.setItem('token', btoa(username + ':' + password));
@@ -32,7 +38,7 @@ export class LoginService {
   }
 
   logOut(): void {
-    sessionStorage.removeItem('username')
+    sessionStorage.removeItem('username');
   }
 }
 

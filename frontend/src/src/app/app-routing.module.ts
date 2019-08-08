@@ -17,7 +17,7 @@ const routes: Routes = [
     path:'advertisements', component:PlaceholderComponent
   },
   {
-    path:'user', component:PlaceholderComponent, canActivate: [AuthGuardService],
+    path:'profile', component:PlaceholderComponent, canActivate: [AuthGuardService],
   }
 ];
 
