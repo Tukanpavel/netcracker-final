@@ -48,8 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/*", "/registration","/login").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .httpBasic()
+                .and().httpBasic()
                 .and().sessionManagement().disable();
     }
   /* @Bean
