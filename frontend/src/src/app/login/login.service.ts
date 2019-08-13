@@ -25,7 +25,7 @@ export class LoginService {
       map(
         userData => {
           sessionStorage.setItem('token', btoa(username + ':' + password));
-          sessionStorage.setItem('username', username)
+          sessionStorage.setItem('username', username);
           return userData;
         }
       )
@@ -33,8 +33,7 @@ export class LoginService {
   }
 
   isLoggedIn(): boolean {
-    let user = sessionStorage.getItem('username')
-    console.log(!(user === null))
+    let user = sessionStorage.getItem('username');
     return !(user === null)
   }
 

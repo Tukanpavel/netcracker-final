@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {Observable, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
+import {LoginService} from "../login/login.service";
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import {environment} from "../../environments/environment";
 })
 export class HttpService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private loginService:LoginService) {
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -30,8 +31,17 @@ export class HttpService {
       'Error!\nSomething bad happened; please try again later.');
   };
 
-  post(url:string,object: Object): Observable<typeof object> {
-    return this.http.post<typeof object>(environment.url+url, object)
+
+
+  post(url: string, object: Object): Observable<typeof object> {
+    if (this.loginService.isLoggedIn()) {
+      let headers= new HttpHeaders({Authorization: 'Basic' + sessionStorage.getItem('token')});
+      return this.http.post<typeof object>(environment.url + url, object, {headers})
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+    return this.http.post<typeof object>(environment.url + url, object)
       .pipe(
         catchError(this.handleError)
       );
