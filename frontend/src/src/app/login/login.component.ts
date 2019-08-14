@@ -40,7 +40,7 @@ export class LoginComponent {
     this.loginService.authenticate(this.user.username, this.user.password).subscribe(
       data => {
         this.router.navigate([
-          this.loginService.redirectUrl !== '' ? this.loginService.redirectUrl : ''
+          this.loginService.getRedirectUrl()
         ])
         this.invalidLogin = false
       },

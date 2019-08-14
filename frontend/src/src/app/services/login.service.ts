@@ -19,6 +19,12 @@ export class LoginService {
 
   redirectUrl: string = '';
 
+  getRedirectUrl():string{
+    return this.redirectUrl !== '' ? this.redirectUrl : '';
+    this.redirectUrl='';
+    console.log(this.redirectUrl);
+  }
+
   authenticate(username, password) {
     let headers=new HttpHeaders({Authorization: 'Basic ' + btoa(username + ':' + password)});
     return this.httpClient.get<Login>('http://localhost:8080/login',{headers} ).pipe(
