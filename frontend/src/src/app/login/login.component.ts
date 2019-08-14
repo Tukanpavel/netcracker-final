@@ -1,8 +1,9 @@
 import { Component} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {LoginInfoModel} from "./login-info.model";
-import {LoginService} from "./login.service";
+import {LoginService} from "../services/login.service";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,11 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
 
-  constructor(private loginService: LoginService, private router: Router){ }
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ){ }
 
   form: FormGroup = new FormGroup({
     username: new FormControl('',[Validators.required]),
@@ -40,10 +45,17 @@ export class LoginComponent {
         this.invalidLogin = false
       },
       error => {
+        this.openSnackBar("It was unable to sign inc. Please, try again later", "OK");
         this.invalidLogin = true
         this.isClicked = false;
       }
     )
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000
+    });
   }
 
 

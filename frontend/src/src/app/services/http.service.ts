@@ -3,7 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {Observable, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
-import {LoginService} from "../login/login.service";
+import {LoginService} from "./login.service";
 
 
 @Injectable({

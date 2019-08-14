@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from "../login/login.service";
+import {LoginService} from "../services/login.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 export class NavComponent implements OnInit {
   appTitle:string='NCvito';
   username():string{ return sessionStorage.getItem('username');}
-  constructor(private loginService:LoginService, private router:Router) { }
+  constructor(public loginService:LoginService, private router:Router) { }
 
   ngOnInit() {
   }
