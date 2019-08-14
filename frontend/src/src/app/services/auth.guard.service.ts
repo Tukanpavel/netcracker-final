@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
 import {LoginService} from "./login.service";
 
@@ -8,8 +8,8 @@ import {LoginService} from "./login.service";
 export class AuthGuardService implements CanActivate {
 
   constructor(
-    private router:Router,
-    private loginService:LoginService) { }
+    private router: Router, private loginService: LoginService) {
+  }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -20,7 +20,9 @@ export class AuthGuardService implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-    if (this.loginService.isLoggedIn()) { return true; }
+    if (this.loginService.isLoggedIn()) {
+      return true;
+    }
 
     // Store the attempted URL for redirecting
     this.loginService.redirectUrl = url;

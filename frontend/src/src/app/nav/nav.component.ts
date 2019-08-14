@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../services/login.service";
 import {Router} from "@angular/router";
 
@@ -8,14 +8,19 @@ import {Router} from "@angular/router";
   styleUrls: ['./nav.component.less']
 })
 export class NavComponent implements OnInit {
-  appTitle:string='NCvito';
-  username():string{ return sessionStorage.getItem('username');}
-  constructor(public loginService:LoginService, private router:Router) { }
+  appTitle: string = 'NCvito';
+
+  username(): string {
+    return sessionStorage.getItem('username');
+  }
+
+  constructor(public loginService: LoginService, private router: Router) {
+  }
 
   ngOnInit() {
   }
 
-  logout(){
+  logout() {
     this.loginService.logOut();
     this.router.navigate(['']);
   }

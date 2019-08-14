@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {Observable, throwError} from "rxjs";
@@ -11,7 +11,7 @@ import {LoginService} from "./login.service";
 })
 export class HttpService {
 
-  constructor(private http: HttpClient, private loginService:LoginService) {
+  constructor(private http: HttpClient, private loginService: LoginService) {
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -32,10 +32,9 @@ export class HttpService {
   };
 
 
-
   post(url: string, object: Object): Observable<typeof object> {
     if (this.loginService.isLoggedIn()) {
-      let headers= new HttpHeaders({Authorization: 'Basic' + sessionStorage.getItem('token')});
+      let headers = new HttpHeaders({Authorization: 'Basic' + sessionStorage.getItem('token')});
       return this.http.post<typeof object>(environment.url + url, object, {headers})
         .pipe(
           catchError(this.handleError)

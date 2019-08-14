@@ -1,8 +1,8 @@
-import { Component} from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {LoginInfoModel} from "./login-info.model";
+import {Component} from "@angular/core";
 import {LoginService} from "../services/login.service";
 import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {LoginInfoModel} from "./login-info.model";
 import {MatSnackBar} from "@angular/material";
 
 @Component({
@@ -14,29 +14,30 @@ export class LoginComponent {
 
   constructor(
     private loginService: LoginService,
-    private router: Router,
+    private router:Router,
     private snackBar: MatSnackBar
-  ){ }
+  ) {
+  }
 
   form: FormGroup = new FormGroup({
-    username: new FormControl('',[Validators.required]),
-    password: new FormControl('',[Validators.required,Validators.minLength(6)]),
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
-  user=new LoginInfoModel;
-  isClicked: boolean=false;
+  user = new LoginInfoModel;
+  isClicked: boolean = false;
   invalidLogin: boolean;
 
   submit() {
     if (this.form.valid && !this.isClicked) {
-      this.isClicked=true;
-      this.user=this.form.value;
+      this.isClicked = true;
+      this.user = this.form.value;
       this.checkLogin();
       console.log(this.user);
     }
   }
 
-  checkLogin(): void{
+  checkLogin(): void {
     this.loginService.authenticate(this.user.username, this.user.password).subscribe(
       data => {
         this.router.navigate([
@@ -59,12 +60,12 @@ export class LoginComponent {
   }
 
 
-  getUsernameErrorMessage(){
+  getUsernameErrorMessage() {
     return 'Write username!';
   }
 
   getPasswordErrorMessage() {
-    if (this.form.get('password').value==='') return "Password is required to sign in.";
+    if (this.form.get('password').value === '') return "Password is required to sign in.";
     else return 'Password must be six characters or longer.'
   }
 }
