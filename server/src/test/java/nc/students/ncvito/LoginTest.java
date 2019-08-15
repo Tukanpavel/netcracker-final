@@ -33,8 +33,7 @@ import java.util.Collections;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -110,15 +109,21 @@ public class LoginTest {
                 //.andExpect(redirectedUrl("/login?error"));
     }
 
-    @Ignore
     @Test
     public void correctLogin() throws Exception {
-        this.mockMvc.perform(formLogin().user("admin").password("admin"))
-                .andDo(print())
-                .andExpect(status().isFound());
-                //.andExpect(redirectedUrl("/"));
 
+        this.mockMvc.perform(get("/login").with(httpBasic("admin","admin")))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
+
+    @Test
+    public void unauthorizedUser() throws Exception {
+        this.mockMvc.perform(get("/login").with(httpBasic("admin","not_admin")))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
+    }
+
 
     @Ignore
     @Test
